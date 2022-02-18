@@ -27,7 +27,7 @@ const PostList = ({ posts }: IPostListProps): JSX.Element => {
                 fontSize: theme.fontSizes.md,
               })}
             >
-              {index + 1}. {post.title}
+              {post.id}. {post.title}
             </Title>
           </span>
           <span>{post.body}</span>
