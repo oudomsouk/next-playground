@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
 const StateManagement = (): JSX.Element => {
-  const { data } = usePosts()
+  const { data } = usePosts({ variables: { page: 1 } })
 
   return (
     <PostListLayout header="State Management">

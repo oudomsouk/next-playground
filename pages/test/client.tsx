@@ -4,7 +4,7 @@ import PostList from '../../components/post-list'
 import PostListLayout from '../../layouts/post-list-layout'
 
 const Client = (): JSX.Element => {
-  const { data } = usePosts(true)
+  const { data } = usePosts({ variables: { page: 1 }, addDelay: true })
 
   return (
     <PostListLayout header="Client-side Rendered">

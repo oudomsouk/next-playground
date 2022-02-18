@@ -6,7 +6,7 @@ import { dehydrate, QueryClient } from 'react-query'
 import PostListLayout from '../../layouts/post-list-layout'
 
 const Server = (): JSX.Element => {
-  const { data } = usePosts()
+  const { data } = usePosts({ variables: { page: 1 } })
 
   return (
     <PostListLayout header="Server-side Rendered">

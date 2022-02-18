@@ -17,6 +17,21 @@ export const fetchPosts = async (addDelay?: boolean): Promise<IPost[]> => {
   )
 }
 
-export const usePosts = (addDelay?: boolean) => {
-  return useQuery('posts', () => fetchPosts(addDelay))
+interface IPostQueryOptions {
+  variables: {
+    page: number
+  }
+  addDelay?: boolean
+}
+
+export const usePosts = ({ variables, addDelay }: IPostQueryOptions) => {
+  const result = useQuery('posts', () => fetchPosts(addDelay))
+
+  return {
+    ...result,
+    data: result.data?.slice(
+      (variables.page - 1) * 10,
+      (variables.page - 1) * 10 + 5
+    ),
+  }
 }
