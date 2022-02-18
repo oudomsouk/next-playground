@@ -4,13 +4,41 @@ import PostList from '../../components/post-list'
 import { LoadingOverlay } from '@mantine/core'
 import { GetServerSideProps } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
+import {
+  usePostListPage,
+  usePostListVariables,
+} from '../../features/store/post-list-variables'
+import PaginationSection from '../../components/pagination-section'
+import Range from '../../components/range'
 
-const StateManagement = (): JSX.Element => {
-  const { data } = usePosts({ variables: { page: 1 } })
+const RangeWithData = (): JSX.Element => {
+  const [page] = usePostListPage()
+  return <Range page={page} />
+}
+
+const PostListWithData = (): JSX.Element => {
+  const variables = usePostListVariables()
+  const { data } = usePosts({ variables })
 
   return (
+    <>
+      {data ? (
+        <>
+          <PostList posts={data} />
+          <RangeWithData />
+        </>
+      ) : (
+        <LoadingOverlay visible />
+      )}
+    </>
+  )
+}
+
+const StateManagement = (): JSX.Element => {
+  return (
     <PostListLayout header="State Management">
-      {data ? <PostList posts={data} /> : <LoadingOverlay visible />}
+      <PostListWithData />
+      <PaginationSection />
     </PostListLayout>
   )
 }

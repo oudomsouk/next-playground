@@ -30,8 +30,8 @@ export const usePosts = ({ variables, addDelay }: IPostQueryOptions) => {
   return {
     ...result,
     data: result.data?.slice(
-      (variables.page - 1) * 10,
-      (variables.page - 1) * 10 + 5
+      (variables.page - 1) * 5,
+      (variables.page - 1) * 5 + 5
     ),
   }
 }
