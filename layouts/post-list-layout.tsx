@@ -25,7 +25,7 @@ const PostListLayout = ({
         },
       })}
     >
-      <Container size="md" style={{ minHeight: '100vh' }}>
+      <Container size="md" style={{ minHeight: '100%' }}>
         {children}
       </Container>
     </AppShell>
