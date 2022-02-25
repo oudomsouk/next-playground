@@ -1,12 +1,18 @@
 import { Pagination } from '@mantine/core'
 import { usePostListPage } from '../features/store/post-list-variables'
 
-const PaginationSection = (): JSX.Element => {
+interface IPaginationSectionProps {
+  totalRecords: number
+}
+
+const PaginationSection = ({
+  totalRecords,
+}: IPaginationSectionProps): JSX.Element => {
   const [page, setPage] = usePostListPage()
 
   return (
     <Pagination
-      total={20}
+      total={Math.max(Math.ceil((totalRecords || 0) / 5), 1)}
       page={page}
       onChange={(page) => {
         setPage(page)

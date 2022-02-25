@@ -20,18 +20,27 @@ export const fetchPosts = async (addDelay?: boolean): Promise<IPost[]> => {
 interface IPostQueryOptions {
   variables: {
     page: number
+    searchString?: string
   }
   addDelay?: boolean
 }
 
-export const usePosts = ({ variables, addDelay }: IPostQueryOptions) => {
+export const usePosts = ({
+  variables: { page = 1, searchString = '' },
+  addDelay,
+}: IPostQueryOptions) => {
   const result = useQuery('posts', () => fetchPosts(addDelay))
+  const filtered = result.data?.filter((post) =>
+    searchString ? post.title.startsWith(searchString) : true
+  )
 
   return {
     ...result,
-    data: result.data?.slice(
-      (variables.page - 1) * 5,
-      (variables.page - 1) * 5 + 5
-    ),
+    data: filtered
+      ? {
+          posts: filtered.slice((page - 1) * 5, (page - 1) * 5 + 5),
+          totalPosts: filtered.length,
+        }
+      : undefined,
   }
 }

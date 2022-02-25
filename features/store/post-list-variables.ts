@@ -1,27 +1,21 @@
-import {
-  configureStore,
-  createReducer,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit'
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 const initialVariables = {
   page: 1,
+  searchString: '',
 }
 
 const postListVariablesSlice = createSlice({
   name: 'postListVariables',
   initialState: initialVariables,
   reducers: {
-    prevPage: (state) => {
-      state.page = Math.max(state.page + 1, 9)
-    },
-    nextPage: (state) => {
-      state.page = Math.min(state.page + 1, 9)
-    },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload
+    },
+    setSearchString: (state, action: PayloadAction<string>) => {
+      state.page = 1
+      state.searchString = action.payload
     },
   },
 })
@@ -50,4 +44,14 @@ export const usePostListPage = (): [number, (page: number) => void] => {
   const setPage = (x: number) =>
     dispatch(postListVariablesSlice.actions.setPage(x))
   return [page, setPage]
+}
+
+export const usePostListSearch = (): [string, (value: string) => void] => {
+  const searchString = useAppSelector(
+    (state) => state.postListVariables.searchString
+  )
+  const dispatch = useAppDispatch()
+  const setSearchString = (x: string) =>
+    dispatch(postListVariablesSlice.actions.setSearchString(x))
+  return [searchString, setSearchString]
 }

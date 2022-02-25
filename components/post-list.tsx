@@ -3,9 +3,10 @@ import { IPost } from '../types/post'
 
 interface IPostListProps {
   posts: IPost[]
+  page: number
 }
 
-const PostList = ({ posts }: IPostListProps): JSX.Element => {
+const PostList = ({ posts, page }: IPostListProps): JSX.Element => {
   return (
     <List
       center
@@ -27,7 +28,7 @@ const PostList = ({ posts }: IPostListProps): JSX.Element => {
                 fontSize: theme.fontSizes.md,
               })}
             >
-              {post.id}. {post.title}
+              {(page - 1) * 5 + index + 1}. {post.title}
             </Title>
           </span>
           <span>{post.body}</span>
