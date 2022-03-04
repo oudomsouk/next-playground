@@ -1,6 +1,6 @@
-import { fetchPosts, usePosts } from '../../features/api/posts'
-import PostListLayout from '../../layouts/post-list-layout'
-import PostList from '../../components/post-list'
+import { fetchPosts, usePosts } from '../features/api/posts'
+import PostListLayout from '../layouts/post-list-layout'
+import PostList from '../components/post-list'
 import { LoadingOverlay } from '@mantine/core'
 import { GetServerSideProps } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
@@ -8,10 +8,10 @@ import {
   usePostListPage,
   usePostListSearch,
   usePostListVariables,
-} from '../../features/store/post-list-variables'
-import PaginationSection from '../../components/pagination-section'
-import Range from '../../components/range'
-import SearchBar from '../../components/search-bar'
+} from '../features/store/post-list-variables'
+import PaginationSection from '../components/pagination-section'
+import Range from '../components/range'
+import SearchBar from '../components/search-bar'
 
 const SearchBarWithData = (): JSX.Element => {
   const [searchString, setSearchString] = usePostListSearch()

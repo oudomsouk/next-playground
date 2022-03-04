@@ -1,8 +1,8 @@
-import { usePosts } from '../../features/api/posts'
+import { usePosts } from '../features/api/posts'
 import { LoadingOverlay } from '@mantine/core'
-import PostList from '../../components/post-list'
-import PostListLayout from '../../layouts/post-list-layout'
-import { usePostListPage } from '../../features/store/post-list-variables'
+import PostList from '../components/post-list'
+import PostListLayout from '../layouts/post-list-layout'
+import { usePostListPage } from '../features/store/post-list-variables'
 
 const Client = (): JSX.Element => {
   const { data } = usePosts({ variables: { page: 1 }, addDelay: true })

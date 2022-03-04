@@ -1,10 +1,10 @@
-import { fetchPosts, usePosts } from '../../features/api/posts'
+import { fetchPosts, usePosts } from '../features/api/posts'
 import { LoadingOverlay } from '@mantine/core'
-import PostList from '../../components/post-list'
+import PostList from '../components/post-list'
 import { GetServerSideProps } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
-import PostListLayout from '../../layouts/post-list-layout'
-import { usePostListPage } from '../../features/store/post-list-variables'
+import PostListLayout from '../layouts/post-list-layout'
+import { usePostListPage } from '../features/store/post-list-variables'
 
 const Server = (): JSX.Element => {
   const { data } = usePosts({ variables: { page: 1 } })
